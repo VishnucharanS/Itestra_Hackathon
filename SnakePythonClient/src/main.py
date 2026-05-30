@@ -2,31 +2,89 @@ import argparse
 import time
 
 from api import SnakeFieldAPI
-from data_structures import Direction
+from strategy import choose_next_move
+
+
+def is_valid_coord(c):
+    return isinstance(c, (list, tuple)) and len(c) >= 2
+
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Snake game bot client")
-    parser.add_argument("team_name", help="Name of the team/snake")
-    parser.add_argument("game_name", help="Name of the game to join")
-    parser.add_argument("--password", default="test", help="Password for server")
-    parser.add_argument("--base_url", default="http://localhost:3030",
-                        help="Base URL of the game server (default: http://localhost:3030)")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("team_name")
+    parser.add_argument("game_name")
+    parser.add_argument("--password", default="test")
+    parser.add_argument("--base_url", default="http://localhost:3030")
     args = parser.parse_args()
 
-    team_name = args.team_name
-    base_url = args.base_url
-    game_name = args.game_name
-    password = args.password
+    api = SnakeFieldAPI(
+        args.base_url,
+        args.team_name,
+        args.game_name,
+        args.password
+    )
 
-    alive = True
-    currentDirection: Direction = "NORTH"
+    current_direction = "NORTH"
+    api.set_direction(current_direction)
 
-    api = SnakeFieldAPI(base_url, team_name, game_name, password)
+    print("Bot started.")
 
-    # initial posting to register
-    api.set_direction(currentDirection)
+    while True:
+        time.sleep(0.5)
 
-    while alive:
-        time.sleep(0.5)  # avoid rate limiting error
         field = api.get_field()
-        api.set_direction(currentDirection)
+        if not field:
+            continue
+
+        snake = field.snakes.get(args.team_name)
+        if not snake or not snake.alive or not snake.body:
+            continue
+
+        head = snake.body[0]
+
+        if not is_valid_coord(head):
+            continue
+
+        my_head = (int(head[0]), int(head[1]))
+
+        # ---------------- OBSTACLES ----------------
+        obstacles = set()
+        snakes_info = []
+
+        for name, s in field.snakes.items():
+            body = [(int(x), int(y)) for x, y in s.body]
+
+            obstacles.update(body)
+
+            snakes_info.append({
+                "name": name,
+                "body": body,
+                "head": body[0]
+            })
+
+        # ---------------- ITEMS (FIXED) ----------------
+        items = field.items
+
+        apples = [i for i in items if i.kind == "Apple"]
+        bad = [i for i in items if i.kind == "BadApple"]
+
+        closest = None
+        if apples:
+            closest = min(
+                apples,
+                key=lambda a: abs(a.position[0] - my_head[0]) + abs(a.position[1] - my_head[1])
+            )
+
+        print(f"[DBG] A:{len(apples)} B:{len(bad)} Target:{closest.position if closest else None}")
+        # ---------------- STRATEGY ----------------
+        new_dir = choose_next_move(
+            my_head,
+            obstacles,
+            snakes_info,
+            field.size,
+            items,
+            current_direction
+        )
+
+        current_direction = new_dir
+        api.set_direction(current_direction)
