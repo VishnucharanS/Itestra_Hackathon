@@ -2,7 +2,7 @@ import argparse
 import time
 
 from api import SnakeFieldAPI
-from strategy import choose_next_move
+from strategy5 import choose_next_move
 
 
 def is_valid_coord(c):
@@ -53,7 +53,6 @@ if __name__ == "__main__":
 
         for name, s in field.snakes.items():
             body = [(int(x), int(y)) for x, y in s.body]
-
             obstacles.update(body)
 
             snakes_info.append({
