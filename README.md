@@ -112,6 +112,7 @@ python main_stacky1.py <team_name> <game_name>
 
 > Final round match recording
 <video controls src="end-game.mp4" title="Title"></video>
+<video controls src="040_End-Game-Faster.mp4" title="Title"></video>
 ---
 
 ## Connection to Autonomous Systems
