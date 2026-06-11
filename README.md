@@ -109,7 +109,7 @@ python main_stacky1.py <team_name> <game_name>
 ---
 ## Match Recording
 
-![Demo](https://github.com/user-attachments/assets/d3751907-7829-4cf6-8241-766f4027fc94)
+![Final Recording](https://github.com/user-attachments/assets/d3751907-7829-4cf6-8241-766f4027fc94)
 
 ---
 
