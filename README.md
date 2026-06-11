@@ -13,6 +13,8 @@ A competitive autonomous bot built for a multiplayer Snake arena where all teams
 
 The server-client architecture was provided by the organizers. Our responsibility was designing and implementing the full decision-making logic — pathfinding, survival, ability management, and enemy prediction — from scratch.
 
+![Final Round Screenshot](04_End-Game.png)
+
 ---
 
 ## Final Round Strategy
