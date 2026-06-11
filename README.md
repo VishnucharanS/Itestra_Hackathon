@@ -112,7 +112,7 @@ python main_stacky1.py <team_name> <game_name>
 
 > Final round match recording
 <video controls src="end-game.mp4" title="Title"></video>
-> https://github.com/VishnucharanS/Itestra_Hackathon/raws/main/end-game.mp4
+> https://github.com/VishnucharanS/Itestra_Hackathon/raw/main/end-game.mp4
 ---
 
 ## Connection to Autonomous Systems
