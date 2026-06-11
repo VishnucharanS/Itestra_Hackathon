@@ -1,7 +1,7 @@
 # Itestra Hackathon — Autonomous Snake Bot
 
 **Result: 1st Place**  
-**Team Name: Titanaboa** 
+**Team Name: Titanaboa**     
 **Team:** Vishnucharan Saravanamoorthy, Saimothish Ramalingam, Yasashwini  Gutta
 **Event:** Itestra x Bonding Hackathon, Aachen
 
