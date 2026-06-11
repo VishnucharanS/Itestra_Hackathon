@@ -2,7 +2,7 @@ import argparse
 import time
 
 from api import SnakeFieldAPI
-from strategy import choose_next_move
+from strategy_final_updated import choose_next_move
 
 
 def is_valid_coord(c):
