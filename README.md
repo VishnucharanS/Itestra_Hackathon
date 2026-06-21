@@ -3,7 +3,7 @@
 **Result: 1st Place**  
 **Team Name: Titanaboa**     
 **Team:** Vishnucharan Saravanamoorthy, Saimothish Ramalingam, Yasashwini  Gutta    
-**Event:** Itestra x Bonding Hackathon, Aachen
+**Event:** Itestra x Bonding Hackathon, Aachen, Germany
 
 ---
 
